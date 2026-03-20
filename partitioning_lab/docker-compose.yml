@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  pg_node:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+  cassandra_node:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+    volumes:
+      - ./cassandra/setup.cql:/setup.cql
